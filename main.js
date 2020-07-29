@@ -1,5 +1,4 @@
 const readline = require('readline');
-const { maxHeaderSize } = require('http');
 
 const r = readline.createInterface({
     input:process.stdin,
