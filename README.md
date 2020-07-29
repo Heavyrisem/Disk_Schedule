@@ -2,9 +2,9 @@
 
 
 
-<img src="./fcfs.png" width="90%"></img>
-<img src="./sstf.png" width="90%"></img>
-<img src="./scan.png" width="90%"></img>
-<img src="./c-scan.png" width="90%"></img>
-<img src="./look.png" width="90%"></img>
-<img src="./c-look.png" width="90%"></img>
+<img src="./img/fcfs.png" width="90%"></img>
+<img src="./img/sstf.png" width="90%"></img>
+<img src="./img/scan.png" width="90%"></img>
+<img src="./img/c-scan.png" width="90%"></img>
+<img src="./img/look.png" width="90%"></img>
+<img src="./img/c-look.png" width="90%"></img>
