@@ -121,7 +121,7 @@ function SCAN() {
             r.question("", data => {
                 queue = data.split(' ');
                 queue.sort((a, b) => a-b);
-                console.log(queue);
+               
     
                 queue.forEach(val => {if(isNaN(val)) return console.log("입력값 중 숫자가 아닌것이 있습니다.")});
     
@@ -185,7 +185,7 @@ function C_SCAN() {
             r.question("", data => {
                 queue = data.split(' ');
                 queue.sort((a, b) => a-b);
-                console.log(queue);
+               
     
                 queue.forEach(val => {if(isNaN(val)) return console.log("입력값 중 숫자가 아닌것이 있습니다.")});
     
@@ -249,7 +249,7 @@ function LOOK() {
             r.question("", data => {
                 queue = data.split(' ');
                 queue.sort((a, b) => a-b);
-                console.log(queue);
+               
     
                 queue.forEach(val => {if(isNaN(val)) return console.log("입력값 중 숫자가 아닌것이 있습니다.")});
     
@@ -313,7 +313,7 @@ function C_LOOK() {
             r.question("", data => {
                 queue = data.split(' ');
                 queue.sort((a, b) => a-b);
-                console.log(queue);
+               
     
                 queue.forEach(val => {if(isNaN(val)) return console.log("입력값 중 숫자가 아닌것이 있습니다.")});
     
