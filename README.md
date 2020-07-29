@@ -1,6 +1,7 @@
 # 디스크 스케줄링
 
 
+
 <img src="./fcfs.png" width="90%"></img>
 <img src="./sstf.png" width="90%"></img>
 <img src="./scan.png" width="90%"></img>
