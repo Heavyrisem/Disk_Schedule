@@ -32,11 +32,13 @@ function FCFS() {
 
         let first_head = HEAD
         let queue = [];
+        let input_;
         let queue_avg = [];
         let tmp = 0;
         console.log("작업 목록을 입력해 주세요 (순서대로)");
         r.question(``, data => {
             queue = data.split(' ');
+            input_ = queue.length;
             queue.forEach((value, index) => {
                 if (isNaN(value)) return console.log("입력값 중 숫자가 아닌것이 있습니다");
             });
@@ -63,6 +65,7 @@ function SSTF() {
     r.question("현재 헤드의 위치를 입력해주세요 : ", HEAD => {
         if (isNaN(HEAD)) return console.log("숫자가 아닙니다.");
 
+        let input_;
         let queue = [];
         let queue_run = [];
         let queue_avg = [];
@@ -72,7 +75,7 @@ function SSTF() {
         r.question('', data => {
 
             queue = data.split(' ');
-            header = queue[0];
+            input_ = queue.length;
             
             queue.forEach((value, index) => {
                 if (isNaN(value)) return console.log("입력값 중 숫자가 아닌것이 있습니다.");
@@ -111,6 +114,7 @@ function SCAN() {
 
         let move_dir = (last_head > second_head) ? true : false;
         let queue = [];
+        let input_;
         let queue_avg = [];
         let queue_run = [];
         r.question("디스크 트랙 범위를 입력해 주세요 (최소, 최대) : ", Track_range => {
@@ -120,6 +124,7 @@ function SCAN() {
             console.log("작업 목록을 입력해 주세요");
             r.question("", data => {
                 queue = data.split(' ');
+                input_ = queue.length;
                 queue.sort((a, b) => a-b);
                
     
@@ -150,6 +155,7 @@ function SCAN() {
 
                 let tmp = 0;
                 let header = last_head;
+                queue_run.pop();
                 queue_run.forEach((value, index) => {
                     if (index == queue_run.length);
                     
@@ -160,71 +166,7 @@ function SCAN() {
                 });
 
                 console.log("실행 순서 : ", queue_run);
-                console.log("평균 대기 시간 : ", tmp/queue_run.length);
-
-            })
-        })
-    }) // 11 39 86 9 57
-}
-
-function C_SCAN() {
-    r.question("헤드가 움직인 순서를 입력해 주세요 (2개) : ", Head_moved => {
-        Head_moved = Head_moved.split(' ');
-        let last_head = Head_moved[Head_moved.length-1];
-        let second_head = Head_moved[Head_moved.length-2];
-
-        let move_dir = (last_head > second_head) ? true : false;
-        let queue = [];
-        let queue_avg = [];
-        let queue_run = [];
-        r.question("디스크 트랙 범위를 입력해 주세요 (최소, 최대) : ", Track_range => {
-            let min = Track_range.split(' ')[0];
-            let max = Track_range.split(' ')[1];
-
-            console.log("작업 목록을 입력해 주세요");
-            r.question("", data => {
-                queue = data.split(' ');
-                queue.sort((a, b) => a-b);
-               
-    
-                queue.forEach(val => {if(isNaN(val)) return console.log("입력값 중 숫자가 아닌것이 있습니다.")});
-    
-                let first_head = Closer(last_head, queue, max);
-
-                for (let i = 0; i < 2; i++) {
-
-                    if (move_dir) { // 증가, 오른쪽
-                    
-                        let tmp = queue.slice(queue.indexOf(first_head) + (first_head > last_head) ? 2 : 0);
-                        // tmp.push(max); // 트랙 끝 추가
-                        queue_run = queue_run.concat(tmp);
-                        move_dir = !move_dir;
-    
-                    } else { // 감소, 왼쪽
-                        
-                        let tmp = queue.slice(0, queue.indexOf(first_head) + ((first_head < last_head) ? 1 : 0));
-                        // tmp.unshift(min); // 트랙 앞 추가
-                        tmp.sort((a,b) => b-a);
-                        queue_run = queue_run.concat(tmp);
-                        move_dir = !move_dir;
-    
-                    }
-
-                }
-
-                let tmp = 0;
-                let header = last_head;
-                queue_run.forEach((value, index) => {
-                    if (index == queue_run.length);
-                    
-        
-                    queue_avg.push(Math.abs(Diff(header, value)));
-                    tmp += Math.abs(Diff(header, value));
-                    header = value;
-                });
-
-                console.log("실행 순서 : ", queue_run);
-                console.log("평균 대기 시간 : ", tmp/queue_run.length);
+                console.log("평균 대기 시간 : ", tmp/input_);
 
             })
         })
@@ -239,6 +181,75 @@ function LOOK() {
 
         let move_dir = (last_head > second_head) ? true : false;
         let queue = [];
+        let input_;
+        let queue_avg = [];
+        let queue_run = [];
+        r.question("디스크 트랙 범위를 입력해 주세요 (최소, 최대) : ", Track_range => {
+            let min = Track_range.split(' ')[0];
+            let max = Track_range.split(' ')[1];
+
+            console.log("작업 목록을 입력해 주세요");
+            r.question("", data => {
+                queue = data.split(' ');
+                input_ = queue.length;
+                queue.sort((a, b) => a-b);
+               
+    
+                queue.forEach(val => {if(isNaN(val)) return console.log("입력값 중 숫자가 아닌것이 있습니다.")});
+    
+                let first_head = Closer(last_head, queue, max);
+
+                for (let i = 0; i < 2; i++) {
+
+                    if (move_dir) { // 증가, 오른쪽
+                    
+                        let tmp = queue.slice(queue.indexOf(first_head) + (first_head > last_head) ? 2 : 0);
+                        // tmp.push(max); // 트랙 끝 추가
+                        queue_run = queue_run.concat(tmp);
+                        move_dir = !move_dir;
+    
+                    } else { // 감소, 왼쪽
+                        
+                        let tmp = queue.slice(0, queue.indexOf(first_head) + ((first_head < last_head) ? 1 : 0));
+                        // tmp.unshift(min); // 트랙 앞 추가
+                        tmp.sort((a,b) => b-a);
+                        queue_run = queue_run.concat(tmp);
+                        move_dir = !move_dir;
+    
+                    }
+
+                }
+
+                let tmp = 0;
+                let header = last_head;
+                queue_run.forEach((value, index) => {
+                    if (index == queue_run.length);
+                    
+        
+                    queue_avg.push(Math.abs(Diff(header, value)));
+                    tmp += Math.abs(Diff(header, value));
+                    header = value;
+                });
+
+                console.log("실행 순서 : ", queue_run);
+                console.log("tmp", tmp);
+                console.log(queue_avg);
+                console.log("평균 대기 시간 : ", tmp/input_);
+
+            })
+        })
+    }) // 11 39 86 9 57
+}
+
+function C_SCAN() {
+    r.question("헤드가 움직인 순서를 입력해 주세요 (2개) : ", Head_moved => {
+        Head_moved = Head_moved.split(' ');
+        let last_head = Head_moved[Head_moved.length-1];
+        let second_head = Head_moved[Head_moved.length-2];
+
+        let move_dir = (last_head > second_head) ? true : false;
+        let queue = [];
+        let input_;
         let queue_avg = [];
         let queue_run = [];
         r.question("디스크 트랙 범위를 입력해 주세요 (최소, 최대) : ", Track_range => {
@@ -249,6 +260,7 @@ function LOOK() {
             r.question("", data => {
                 queue = data.split(' ');
                 queue.sort((a, b) => a-b);
+                input_ = queue.length;
                
     
                 queue.forEach(val => {if(isNaN(val)) return console.log("입력값 중 숫자가 아닌것이 있습니다.")});
@@ -288,7 +300,7 @@ function LOOK() {
                 });
 
                 console.log("실행 순서 : ", queue_run);
-                console.log("평균 대기 시간 : ", tmp/queue_run.length);
+                console.log("평균 대기 시간 : ", tmp/input_);
 
             })
         })
@@ -303,6 +315,7 @@ function C_LOOK() {
 
         let move_dir = (last_head > second_head) ? true : false;
         let queue = [];
+        let input_;
         let queue_avg = [];
         let queue_run = [];
         r.question("디스크 트랙 범위를 입력해 주세요 (최소, 최대) : ", Track_range => {
@@ -313,6 +326,7 @@ function C_LOOK() {
             r.question("", data => {
                 queue = data.split(' ');
                 queue.sort((a, b) => a-b);
+                input_ = queue.length;
                
     
                 queue.forEach(val => {if(isNaN(val)) return console.log("입력값 중 숫자가 아닌것이 있습니다.")});
@@ -352,7 +366,7 @@ function C_LOOK() {
                 });
 
                 console.log("실행 순서 : ", queue_run);
-                console.log("평균 대기 시간 : ", tmp/queue_run.length);
+                console.log("평균 대기 시간 : ", tmp/input_);
 
             })
         })
